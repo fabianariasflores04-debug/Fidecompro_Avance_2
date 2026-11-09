@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Fidecompro" default="jar" basedir=".">
+    <property file="nbproject/project.properties"/>
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes" source="17" target="17" encoding="UTF-8" includeantruntime="false"/>
+    </target>
+    <target name="jar" depends="compile">
+        <mkdir dir="dist"/>
+        <jar destfile="dist/Fidecompro.jar" basedir="build/classes">
+            <manifest><attribute name="Main-Class" value="fidecompro.Main"/></manifest>
+        </jar>
+    </target>
+    <target name="run" depends="compile"><java classname="fidecompro.Main" fork="true"><classpath path="build/classes"/></java></target>
+    <target name="test" depends="compile">
+        <mkdir dir="build/test"/>
+        <javac srcdir="test" destdir="build/test" source="17" target="17" encoding="UTF-8" includeantruntime="false"><classpath path="build/classes"/></javac>
+        <java classname="fidecompro.Pruebas" fork="true" failonerror="true"><classpath path="build/classes${path.separator}build/test"/></java>
+    </target>
+    <target name="clean"><delete dir="build"/><delete dir="dist"/></target>
+    <target name="rebuild" depends="clean,jar"/>
+    <target name="javadoc"><mkdir dir="build/javadoc"/><javadoc sourcepath="src" destdir="build/javadoc" encoding="UTF-8"/></target>
+</project>
